@@ -1,6 +1,7 @@
 import { Typography } from "antd";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { Tasks } from "./index";
 
 function Project() {
   const { projectId } = useParams();
@@ -31,6 +32,7 @@ function Project() {
       ) : (
         <Title level={3}>{project.name}</Title>
       )}
+      <Tasks parent="project" parentId={project.id} />
     </div>
   );
 }
