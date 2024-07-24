@@ -8,6 +8,7 @@ import {
   EditOutlined,
 } from "@ant-design/icons";
 import { setSections } from "../redux/sectionSlice";
+import { Tasks } from "./index";
 
 function Sections({ projectId }: any) {
   const [loading, setLoading] = useState(true);
@@ -53,7 +54,6 @@ function Sections({ projectId }: any) {
 
   return (
     <div>
-      <p>Sections</p>
       <List
         className="demo-loadmore-list"
         loading={loading}
@@ -62,27 +62,55 @@ function Sections({ projectId }: any) {
         dataSource={sections}
         renderItem={(section: any) => (
           <List.Item
-            actions={[
-              <a key="list-loadmore-edit">
-                <EditOutlined />
-              </a>,
-              <a key="list-loadmore-more">
-                <DeleteOutlined />
-              </a>,
-            ]}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
           >
             <Skeleton title={false} loading={loading} active>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "12px",
-                }}
-              >
-                <a>
-                  <CheckCircleOutlined />
-                </a>
-                <Text>{section.name}</Text>
+              <div style={{ width: "100%" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    width: "100%",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "12px",
+                    }}
+                  >
+                    <a>
+                      <CheckCircleOutlined />
+                    </a>
+                    <Text>{section.name}</Text>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "12px",
+                    }}
+                  >
+                    <a key="list-loadmore-edit">
+                      <EditOutlined />
+                    </a>
+                    <a key="list-loadmore-more">
+                      <DeleteOutlined />
+                    </a>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    width: "98%",
+                    margin: "auto",
+                  }}
+                >
+                  <Tasks parent="section" parentId={section.id} />
+                </div>
               </div>
             </Skeleton>
           </List.Item>

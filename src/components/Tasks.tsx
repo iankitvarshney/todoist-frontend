@@ -7,7 +7,7 @@ import {
   DeleteOutlined,
   EditOutlined,
 } from "@ant-design/icons";
-import { setProjectTasks } from "../redux/taskSlice";
+import { setProjectTasks, setSectionTasks } from "../redux/taskSlice";
 
 function Tasks({ parent, parentId }: any) {
   const [loading, setLoading] = useState(true);
@@ -43,12 +43,21 @@ function Tasks({ parent, parentId }: any) {
           throw new Error(response.data);
         }
 
-        dispatch(
-          setProjectTasks({
-            id: parentId,
-            data: response.data.data,
-          })
-        );
+        if (parent === "project") {
+          dispatch(
+            setProjectTasks({
+              id: parentId,
+              data: response.data.data,
+            })
+          );
+        } else if (parent === "section") {
+          dispatch(
+            setSectionTasks({
+              id: parentId,
+              data: response.data.data,
+            })
+          );
+        }
       } catch (error: unknown) {
         const knownError = error as AxiosError;
         console.log(knownError.response?.statusText);
