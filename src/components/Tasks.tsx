@@ -1,19 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios, { AxiosError } from "axios";
-import { List, Skeleton, Typography } from "antd";
-import {
-  CheckCircleOutlined,
-  DeleteOutlined,
-  EditOutlined,
-} from "@ant-design/icons";
 import { setProjectTasks, setSectionTasks } from "../redux/taskSlice";
+import { TaskTree } from "./index";
 
 function Tasks({ parent, parentId }: any) {
   const [loading, setLoading] = useState(true);
+
   let tasks: any = [];
   const dispatch = useDispatch();
-  const { Text } = Typography;
 
   if (parent === "project") {
     const projectTasks = useSelector<any>(
@@ -71,40 +66,7 @@ function Tasks({ parent, parentId }: any) {
 
   return (
     <div>
-      <List
-        className="demo-loadmore-list"
-        loading={loading}
-        itemLayout="horizontal"
-        // loadMore={loadMore}
-        dataSource={tasks}
-        renderItem={(task: any) => (
-          <List.Item
-            actions={[
-              <a key="list-loadmore-edit">
-                <EditOutlined />
-              </a>,
-              <a key="list-loadmore-more">
-                <DeleteOutlined />
-              </a>,
-            ]}
-          >
-            <Skeleton title={false} loading={loading} active>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "12px",
-                }}
-              >
-                <a>
-                  <CheckCircleOutlined />
-                </a>
-                <Text>{task.content}</Text>
-              </div>
-            </Skeleton>
-          </List.Item>
-        )}
-      />
+      <TaskTree tasks={tasks} parentId={null} />
     </div>
   );
 }
