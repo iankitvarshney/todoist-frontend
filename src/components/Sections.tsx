@@ -7,45 +7,36 @@ import {
   DeleteOutlined,
   EditOutlined,
 } from "@ant-design/icons";
-import { setProjectTasks } from "../redux/taskSlice";
+import { setSections } from "../redux/sectionSlice";
 
-function Tasks({ parent, parentId }: any) {
+function Sections({ projectId }: any) {
   const [loading, setLoading] = useState(true);
-  let tasks: any = [];
+
   const dispatch = useDispatch();
   const { Text } = Typography;
+  let sections: any = [];
 
-  if (parent === "project") {
-    const projectTasks = useSelector<any>(
-      (store) => store.task.projectTasks[parentId]
-    );
+  const projectSections = useSelector<any>(
+    (store) => store.section.sections[projectId]
+  );
 
-    if (projectTasks !== undefined) {
-      tasks = projectTasks;
-    }
-  } else if (parent === "section") {
-    const sectionTasks = useSelector<any>(
-      (store) => store.task.sectionTasks[parentId]
-    );
-
-    if (sectionTasks !== undefined) {
-      tasks = sectionTasks;
-    }
+  if (projectSections !== undefined) {
+    sections = projectSections;
   }
 
   useEffect(() => {
-    async function getTasks() {
+    async function getSections() {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/v1/tasks?${parent + "Id"}=${parentId}`
+          `http://localhost:3000/api/v1/sections?projectId=${projectId}`
         );
         if (response.status !== 200) {
           throw new Error(response.data);
         }
 
         dispatch(
-          setProjectTasks({
-            id: parentId,
+          setSections({
+            id: projectId,
             data: response.data.data,
           })
         );
@@ -57,18 +48,19 @@ function Tasks({ parent, parentId }: any) {
       }
     }
 
-    getTasks();
-  }, [parentId]);
+    getSections();
+  }, [projectId]);
 
   return (
     <div>
+      <p>Sections</p>
       <List
         className="demo-loadmore-list"
         loading={loading}
         itemLayout="horizontal"
         // loadMore={loadMore}
-        dataSource={tasks}
-        renderItem={(task: any) => (
+        dataSource={sections}
+        renderItem={(section: any) => (
           <List.Item
             actions={[
               <a key="list-loadmore-edit">
@@ -90,7 +82,7 @@ function Tasks({ parent, parentId }: any) {
                 <a>
                   <CheckCircleOutlined />
                 </a>
-                <Text>{task.content}</Text>
+                <Text>{section.name}</Text>
               </div>
             </Skeleton>
           </List.Item>
@@ -100,4 +92,4 @@ function Tasks({ parent, parentId }: any) {
   );
 }
 
-export default Tasks;
+export default Sections;
