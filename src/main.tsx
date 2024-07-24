@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.tsx";
-import { Homepage, Inbox } from "./components";
+import { Homepage, Project } from "./components";
 import "./index.css";
 
 const appRouter = createBrowserRouter([
@@ -16,7 +16,11 @@ const appRouter = createBrowserRouter([
         children: [
           {
             path: "inbox",
-            element: <Inbox />,
+            element: <Project />,
+          },
+          {
+            path: "project/:projectId",
+            element: <Project />,
           },
         ],
       },

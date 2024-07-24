@@ -1,4 +1,4 @@
 import Homepage from "./pages/Homepage";
-import Inbox from "./Inbox";
+import Project from "./Project";
 
-export { Homepage, Inbox };
+export { Homepage, Project };

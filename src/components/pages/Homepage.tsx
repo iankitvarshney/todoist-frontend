@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { Button, Layout, Menu, theme } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import axios, { AxiosError } from "axios";
+import { Button, Layout, Menu, theme, Typography } from "antd";
 import {
+  EllipsisOutlined,
   InboxOutlined,
   MenuOutlined,
+  NumberOutlined,
   ProjectOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import { setProjects } from "../../redux/projectSlice";
 
 const { Header, Sider, Content } = Layout;
 
@@ -17,6 +22,58 @@ const Homepage: React.FC = () => {
   } = theme.useToken();
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { Text } = Typography;
+
+  const projects: any = useSelector<any>((store) => store.project.projects);
+
+  useEffect(() => {
+    async function getProjects() {
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/api/v1/projects"
+        );
+        if (response.status !== 200) {
+          throw new Error(response.data);
+        }
+
+        dispatch(setProjects(response.data.data));
+      } catch (error: unknown) {
+        const knownError = error as AxiosError;
+        console.log(knownError.response?.statusText);
+      }
+    }
+
+    getProjects();
+  }, []);
+
+  const projectsList = projects
+    .filter((project: any) => project.isInboxProject === false)
+    .map((project: any): any => {
+      return {
+        key: `project/${project.id}`,
+        icon: <NumberOutlined />,
+        label: (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Text>{project.name}</Text>
+            <Button
+              style={{
+                border: "none",
+                backgroundColor: "transparent",
+              }}
+            >
+              <EllipsisOutlined />
+            </Button>
+          </div>
+        ),
+      };
+    });
 
   return (
     <Layout style={{ height: "100vh" }}>
@@ -34,13 +91,11 @@ const Homepage: React.FC = () => {
           mode="inline"
           defaultSelectedKeys={["1"]}
           onSelect={({ key }) => {
-            if (key === "2") {
-              navigate("/app/inbox");
-            }
+            navigate(`/app/${key}`);
           }}
           items={[
             {
-              key: "1",
+              key: "user",
               icon: <UserOutlined />,
               label: "User",
             },
@@ -48,15 +103,15 @@ const Homepage: React.FC = () => {
               type: "divider",
             },
             {
-              key: "2",
+              key: "inbox",
               icon: <InboxOutlined />,
               label: "Inbox",
             },
             {
-              key: "3",
+              key: "my-projects",
               icon: <ProjectOutlined />,
               label: "My Projects",
-              children: [],
+              children: projectsList,
             },
           ]}
         />
