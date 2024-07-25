@@ -59,10 +59,7 @@ function Task({ task, tasks }: any) {
             <Title level={5}>Sub-tasks</Title>
             <TaskTree tasks={tasks} parentId={task.id} />
           </div>
-          <div style={{ padding: "12px 0" }}>
-            <Title level={5}>Comments</Title>
-            <Comments parent="task" parentId={task.id} />
-          </div>
+          <Comments parent="task" parentId={task.id} />
         </Modal>
       </Skeleton>
     </List.Item>

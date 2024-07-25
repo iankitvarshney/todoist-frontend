@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios, { AxiosError } from "axios";
-import { List } from "antd";
+import { Button, List, Typography } from "antd";
+import { DownOutlined, RightOutlined } from "@ant-design/icons";
 import { setTaskComments } from "../redux/commentSlice";
 import { Comment } from "./index";
 
 function Comments({ parent, parentId }: any) {
   const [loading, setLoading] = useState(true);
+  const [open, setOpen] = useState(false);
 
   let comments: any = [];
   const dispatch = useDispatch();
+  const { Title } = Typography;
 
   if (parent === "task") {
     const taskComments = useSelector<any>(
@@ -20,6 +23,10 @@ function Comments({ parent, parentId }: any) {
       comments = taskComments;
     }
   }
+
+  const handleOpen = () => {
+    setOpen(!open);
+  };
 
   useEffect(() => {
     async function getTasks() {
@@ -51,15 +58,36 @@ function Comments({ parent, parentId }: any) {
   }, [parentId]);
 
   return (
-    <div>
-      <List
-        className="demo-loadmore-list"
-        loading={loading}
-        itemLayout="horizontal"
-        // loadMore={loadMore}
-        dataSource={comments}
-        renderItem={(comment: any) => <Comment comment={comment} />}
-      />
+    <div style={{ padding: "12px 0" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "16px",
+          width: "100%",
+        }}
+      >
+        <Button
+          onClick={handleOpen}
+          style={{
+            height: "28px",
+            width: "20px",
+          }}
+        >
+          {open ? <DownOutlined /> : <RightOutlined />}
+        </Button>
+        <Title level={5}>Comments</Title>
+      </div>
+      {open && (
+        <List
+          className="demo-loadmore-list"
+          loading={loading}
+          itemLayout="horizontal"
+          // loadMore={loadMore}
+          dataSource={comments}
+          renderItem={(comment: any) => <Comment comment={comment} />}
+        />
+      )}
     </div>
   );
 }
