@@ -5,7 +5,7 @@ import {
   DeleteOutlined,
   EditOutlined,
 } from "@ant-design/icons";
-import { TaskTree } from "./index";
+import { Comments, TaskTree } from "./index";
 
 function Task({ task, tasks }: any) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -58,6 +58,10 @@ function Task({ task, tasks }: any) {
           <div style={{ padding: "12px 0" }}>
             <Title level={5}>Sub-tasks</Title>
             <TaskTree tasks={tasks} parentId={task.id} />
+          </div>
+          <div style={{ padding: "12px 0" }}>
+            <Title level={5}>Comments</Title>
+            <Comments parent="task" parentId={task.id} />
           </div>
         </Modal>
       </Skeleton>
