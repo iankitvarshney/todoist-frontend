@@ -62,9 +62,8 @@ function Comments({ parent, parentId }: any) {
       <div
         style={{
           display: "flex",
-          alignItems: "center",
+          alignItems: "flex-start",
           gap: "16px",
-          width: "100%",
         }}
       >
         <Button
