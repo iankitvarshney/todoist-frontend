@@ -1,5 +1,6 @@
 import Comment from "./Comment";
 import Comments from "./Comments";
+import CustomModal from "./CustomModal";
 import Homepage from "./pages/Homepage";
 import Project from "./Project";
 import Section from "./Section";
@@ -11,6 +12,7 @@ import TaskTree from "./TaskTree";
 export {
   Comment,
   Comments,
+  CustomModal,
   Homepage,
   Project,
   Section,
