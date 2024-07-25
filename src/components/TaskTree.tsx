@@ -20,7 +20,7 @@ function TaskTree({ tasks, parentId, level = 0 }: any) {
       }}
       renderItem={(task: any) => (
         <>
-          <Task task={task} />
+          <Task task={task} tasks={tasks} />
           <TaskTree tasks={tasks} parentId={task.id} level={level + 1} />
         </>
       )}

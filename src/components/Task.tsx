@@ -5,11 +5,12 @@ import {
   DeleteOutlined,
   EditOutlined,
 } from "@ant-design/icons";
+import { TaskTree } from "./index";
 
-function Task({ task }: any) {
+function Task({ task, tasks }: any) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { Text } = Typography;
+  const { Text, Title } = Typography;
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -54,9 +55,10 @@ function Task({ task }: any) {
           onCancel={handleCancel}
           mask={false}
         >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
+          <div style={{ padding: "12px 0" }}>
+            <Title level={5}>Sub-tasks</Title>
+            <TaskTree tasks={tasks} parentId={task.id} />
+          </div>
         </Modal>
       </Skeleton>
     </List.Item>
