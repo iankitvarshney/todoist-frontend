@@ -1,20 +1,15 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios, { AxiosError } from "axios";
-import { List, Skeleton, Typography } from "antd";
-import {
-  CheckCircleOutlined,
-  DeleteOutlined,
-  EditOutlined,
-} from "@ant-design/icons";
+import { List } from "antd";
 import { setSections } from "../redux/sectionSlice";
-import { Tasks } from "./index";
+import { Section } from "./index";
 
 function Sections({ projectId }: any) {
   const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
-  const { Text } = Typography;
+
   let sections: any = [];
 
   const projectSections = useSelector<any>(
@@ -53,68 +48,14 @@ function Sections({ projectId }: any) {
   }, [projectId]);
 
   return (
-    <div>
+    <div style={{ padding: "12px 0" }}>
       <List
         className="demo-loadmore-list"
         loading={loading}
         itemLayout="horizontal"
         // loadMore={loadMore}
         dataSource={sections}
-        renderItem={(section: any) => (
-          <List.Item
-            style={{
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <Skeleton title={false} loading={loading} active>
-              <div style={{ width: "100%" }}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    width: "100%",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "12px",
-                    }}
-                  >
-                    <a>
-                      <CheckCircleOutlined />
-                    </a>
-                    <Text>{section.name}</Text>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "12px",
-                    }}
-                  >
-                    <a key="list-loadmore-edit">
-                      <EditOutlined />
-                    </a>
-                    <a key="list-loadmore-more">
-                      <DeleteOutlined />
-                    </a>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    width: "98%",
-                    margin: "auto",
-                  }}
-                >
-                  <Tasks parent="section" parentId={section.id} />
-                </div>
-              </div>
-            </Skeleton>
-          </List.Item>
-        )}
+        renderItem={(section: any) => <Section section={section} />}
       />
     </div>
   );
