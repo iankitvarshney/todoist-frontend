@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { Button, Modal } from "antd";
 
-function CustomModal({ children, buttonTitle, modalTitle }: any) {
+function CustomModal({
+  children,
+  buttonTitle,
+  modalTitle,
+  buttonStyles = {},
+  modalStyles = {},
+}: any) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
@@ -18,7 +24,7 @@ function CustomModal({ children, buttonTitle, modalTitle }: any) {
 
   return (
     <>
-      <Button type="text" onClick={showModal}>
+      <Button type="text" onClick={showModal} style={buttonStyles}>
         {buttonTitle}
       </Button>
       <Modal
@@ -26,6 +32,7 @@ function CustomModal({ children, buttonTitle, modalTitle }: any) {
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
+        style={modalStyles}
       >
         {children}
       </Modal>

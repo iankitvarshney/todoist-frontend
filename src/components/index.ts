@@ -6,6 +6,7 @@ import Project from "./Project";
 import Section from "./Section";
 import Sections from "./Sections";
 import Task from "./Task";
+import TaskModal from "./TaskModal";
 import Tasks from "./Tasks";
 import TaskTree from "./TaskTree";
 
@@ -18,6 +19,7 @@ export {
   Section,
   Sections,
   Task,
+  TaskModal,
   Tasks,
   TaskTree,
 };

@@ -1,23 +1,12 @@
-import { useState } from "react";
-import { Button, List, Skeleton, Typography } from "antd";
+import { List, Skeleton } from "antd";
 import {
   CheckCircleOutlined,
   DeleteOutlined,
-  DownOutlined,
   EditOutlined,
-  RightOutlined,
 } from "@ant-design/icons";
-import { Comments, CustomModal, TaskTree } from "./index";
+import { CustomModal, TaskModal } from "./index";
 
 function Task({ task, tasks }: any) {
-  const [open, setOpen] = useState(false);
-
-  const { Title } = Typography;
-
-  const handleOpen = () => {
-    setOpen(!open);
-  };
-
   return (
     <List.Item
       actions={[
@@ -41,28 +30,7 @@ function Task({ task, tasks }: any) {
             <CheckCircleOutlined />
           </a>
           <CustomModal buttonTitle={task.content} modalTitle={task.content}>
-            <div style={{ padding: "12px 0" }}>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: "16px",
-                }}
-              >
-                <Button
-                  onClick={handleOpen}
-                  style={{
-                    height: "28px",
-                    width: "20px",
-                  }}
-                >
-                  {open ? <DownOutlined /> : <RightOutlined />}
-                </Button>
-                <Title level={5}>Sub-tasks</Title>
-              </div>
-              {open && <TaskTree tasks={tasks} parentId={task.id} />}
-            </div>
-            <Comments parent="task" parentId={task.id} />
+            <TaskModal task={task} tasks={tasks} />
           </CustomModal>
         </div>
       </Skeleton>
