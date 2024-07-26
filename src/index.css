@@ -3,3 +3,23 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.ant-menu-submenu-title {
+  padding: 0 0 0 8px !important;
+}
+
+.ant-menu-item {
+  padding: 0 0 0 8px !important;
+}
+
+.my-projects-menu .ant-menu-item .project-item-button-icon {
+  display: none;
+}
+
+.my-projects-menu .ant-menu-item:hover .project-item-button-icon {
+  display: unset;
+}
+
+.my-projects-menu .ant-menu-item:hover .project-item-button-text {
+  display: none;
+}

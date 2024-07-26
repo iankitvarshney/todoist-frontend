@@ -63,12 +63,26 @@ const Homepage: React.FC = () => {
           >
             <Text>{project.name}</Text>
             <Button
+              size="small"
+              className="project-item-button"
               style={{
                 border: "none",
                 backgroundColor: "transparent",
               }}
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
             >
-              <EllipsisOutlined />
+              <EllipsisOutlined
+                className="project-item-button-icon"
+                style={{ fontSize: "20px" }}
+              />
+              <Text
+                className="project-item-button-text"
+                style={{ paddingRight: "6px" }}
+              >
+                4
+              </Text>
             </Button>
           </div>
         ),
@@ -112,6 +126,7 @@ const Homepage: React.FC = () => {
               icon: <ProjectOutlined />,
               label: "My Projects",
               children: projectsList,
+              className: "my-projects-menu",
             },
           ]}
         />
