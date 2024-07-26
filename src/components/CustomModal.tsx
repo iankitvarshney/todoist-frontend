@@ -33,6 +33,16 @@ function CustomModal({
         onOk={handleOk}
         onCancel={handleCancel}
         style={modalStyles}
+        cancelButtonProps={{
+          style: {
+            display: "none",
+          },
+        }}
+        okButtonProps={{
+          style: {
+            display: "none",
+          },
+        }}
       >
         {children}
       </Modal>

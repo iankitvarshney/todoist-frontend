@@ -8,10 +8,12 @@ import {
   InboxOutlined,
   MenuOutlined,
   NumberOutlined,
+  PlusOutlined,
   ProjectOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import { setProjects } from "../../redux/projectSlice";
+import { CustomModal } from "../index";
 
 const { Header, Sider, Content } = Layout;
 
@@ -126,9 +128,28 @@ const Homepage: React.FC = () => {
             {
               key: "my-projects",
               icon: <ProjectOutlined />,
-              label: "My Projects",
               children: projectsList,
               className: "my-projects-menu",
+              label: (
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text style={{ flexGrow: 0.74 }}>My Projects</Text>
+                  <CustomModal
+                    buttonTitle={<PlusOutlined />}
+                    modalTitle="Add project"
+                    buttonStyles={{
+                      width: "24px",
+                      height: "28px",
+                    }}
+                  >
+                    <p>Add project Form Component</p>
+                  </CustomModal>
+                </div>
+              ),
             },
           ]}
         />
