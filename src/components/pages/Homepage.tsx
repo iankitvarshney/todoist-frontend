@@ -63,11 +63,13 @@ const Homepage: React.FC = () => {
           >
             <Text>{project.name}</Text>
             <Button
+              type="text"
               size="small"
               className="project-item-button"
               style={{
                 border: "none",
                 backgroundColor: "transparent",
+                height: "28px",
               }}
               onClick={(e) => {
                 e.stopPropagation();

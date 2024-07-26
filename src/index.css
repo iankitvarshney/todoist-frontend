@@ -12,6 +12,10 @@
   padding: 0 0 0 8px !important;
 }
 
+.project-item-button:hover {
+  background-color: #ebebeb !important;
+}
+
 .my-projects-menu .ant-menu-item .project-item-button-icon {
   display: none;
 }
