@@ -66,7 +66,7 @@ function Tasks({ parent, parentId }: any) {
 
   return (
     <div>
-      <TaskTree tasks={tasks} />
+      <TaskTree tasks={tasks} parentId={null} />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { Tree, type TreeDataNode, type TreeProps } from "antd";
 import Task from "./Task";
 
-function TaskTree({ tasks }: any) {
+function TaskTree({ tasks, parentId }: any) {
   const constructTree = (tasks: any, parentId: any) => {
     const filteredTasks = tasks.filter(
       (task: any) => task.parentId === parentId
@@ -23,7 +23,7 @@ function TaskTree({ tasks }: any) {
     });
   };
 
-  const treeData: TreeDataNode[] = constructTree(tasks, null);
+  const treeData: TreeDataNode[] = constructTree(tasks, parentId);
 
   return (
     <div>
