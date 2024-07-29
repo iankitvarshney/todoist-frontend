@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
 
 function CustomModal({
   children,
@@ -24,9 +24,9 @@ function CustomModal({
 
   return (
     <>
-      <Button type="text" onClick={showModal} style={buttonStyles}>
+      <div style={buttonStyles} onClick={showModal}>
         {buttonTitle}
-      </Button>
+      </div>
       <Modal
         title={modalTitle}
         open={isModalOpen}

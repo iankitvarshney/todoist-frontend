@@ -1,30 +1,34 @@
-import { List } from "antd";
-import { Task } from "./index";
+import { Tree, type TreeDataNode, type TreeProps } from "antd";
+import Task from "./Task";
 
-function TaskTree({ tasks, parentId, level = 0 }: any) {
-  const filteredTasks = tasks.filter((task: any) => task.parentId === parentId);
+function TaskTree({ tasks }: any) {
+  const constructTree = (tasks: any, parentId: any) => {
+    const filteredTasks = tasks.filter(
+      (task: any) => task.parentId === parentId
+    );
 
-  if (filteredTasks.length === 0) {
-    return <></>;
-  }
+    return filteredTasks.map((task: any) => {
+      return {
+        title: <Task task={task} tasks={tasks} />,
+        className: "tree-task",
+        key: task.id + "-" + task.content,
+        children: constructTree(tasks, task.id),
+        style: {
+          display: "flex",
+          justifyContent: "center",
+          padding: "0",
+          margin: "0",
+        },
+      };
+    });
+  };
+
+  const treeData: TreeDataNode[] = constructTree(tasks, null);
 
   return (
-    <List
-      className="demo-loadmore-list"
-      loading={false}
-      itemLayout="horizontal"
-      // loadMore={loadMore}
-      dataSource={filteredTasks}
-      style={{
-        paddingLeft: `${16 * level}px`,
-      }}
-      renderItem={(task: any) => (
-        <>
-          <Task task={task} tasks={tasks} />
-          <TaskTree tasks={tasks} parentId={task.id} level={level + 1} />
-        </>
-      )}
-    />
+    <div>
+      <Tree blockNode={true} treeData={treeData} />
+    </div>
   );
 }
 

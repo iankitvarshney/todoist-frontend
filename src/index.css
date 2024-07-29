@@ -27,3 +27,37 @@
 .my-projects-menu .ant-menu-item:hover .project-item-button-text {
   display: none;
 }
+
+.tree-task {
+  display: flex;
+  align-items: flex-start;
+}
+
+.tree-task:hover {
+  background-color: none;
+}
+
+.tree-task .ant-tree-switcher {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 28px;
+}
+
+.tree-task .ant-tree-node-content-wrapper {
+  border-bottom: 1px solid lightgray;
+  border-radius: 0;
+}
+
+.tree-task .ant-tree-node-content-wrapper:hover {
+  background-color: transparent;
+}
+
+.tree-task .check-btn.ant-btn:hover {
+  background-color: transparent;
+}
+
+.tree-task button.ant-btn svg {
+  width: 20px;
+  height: 20px;
+}
