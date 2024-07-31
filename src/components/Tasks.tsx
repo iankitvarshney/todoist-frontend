@@ -11,11 +11,11 @@ function Tasks({ parent, parentId }: any) {
   const dispatch = useDispatch();
 
   if (parent === "project") {
-    const projectTasks = useSelector<any>(
-      (store) => store.task.projectTasks[parentId]
+    const projectTasks: any = useSelector<any>(
+      (store) => store.task.projectTasks
     );
 
-    if (projectTasks !== undefined) {
+    if (projectTasks.length !== 0) {
       tasks = projectTasks;
     }
   } else if (parent === "section") {
@@ -39,12 +39,7 @@ function Tasks({ parent, parentId }: any) {
         }
 
         if (parent === "project") {
-          dispatch(
-            setProjectTasks({
-              id: parentId,
-              data: response.data.data,
-            })
-          );
+          dispatch(setProjectTasks(response.data.data));
         } else if (parent === "section") {
           dispatch(
             setSectionTasks({

@@ -3,12 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const taskSlice = createSlice({
   name: "task",
   initialState: {
-    projectTasks: {},
+    projectTasks: [],
     sectionTasks: {},
   },
   reducers: {
     setProjectTasks: (state: any, action) => {
-      state.projectTasks[action.payload.id] = action.payload.data;
+      state.projectTasks = action.payload;
     },
     setSectionTasks: (state: any, action) => {
       state.sectionTasks[action.payload.id] = action.payload.data;

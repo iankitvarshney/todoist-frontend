@@ -5,9 +5,7 @@ import { NumberOutlined } from "@ant-design/icons";
 import { ModalTaskTree } from "./index";
 
 function TaskModal({ task, handleCancel }: any) {
-  const tasks = useSelector(
-    (store: any) => store.task.projectTasks[task.projectId]
-  );
+  const tasks = useSelector((store: any) => store.task.projectTasks);
 
   const project = useSelector((store: any) => store.project.projects[0]);
 
