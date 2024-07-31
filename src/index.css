@@ -28,36 +28,27 @@
   display: none;
 }
 
-.tree-task {
-  display: flex;
-  align-items: flex-start;
-}
-
-.tree-task:hover {
-  background-color: none;
-}
-
-.tree-task .ant-tree-switcher {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 28px;
-}
-
-.tree-task .ant-tree-node-content-wrapper {
-  border-bottom: 1px solid lightgray;
+.task-tree .ant-tree-node-content-wrapper {
+  border-bottom: 1px solid #eee;
   border-radius: 0;
 }
 
-.tree-task .ant-tree-node-content-wrapper:hover {
+.task-tree .ant-tree-node-content-wrapper:hover {
   background-color: transparent;
 }
 
-.tree-task .check-btn.ant-btn:hover {
-  background-color: transparent;
+.task-tree .ant-tree-node-selected {
+  background-color: transparent !important;
 }
 
-.tree-task button.ant-btn svg {
-  width: 20px;
-  height: 20px;
+.task-tree .ant-tree-switcher {
+  height: 24px;
+}
+
+.ant-modal .ant-modal-content {
+  padding: 0;
+}
+
+.ant-modal-content .ant-modal-footer {
+  margin: 0;
 }

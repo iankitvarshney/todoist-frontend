@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios, { AxiosError } from "axios";
 import { setProjectTasks, setSectionTasks } from "../redux/taskSlice";
-import { TaskTree } from "./index";
+import { MainTaskTree } from "./index";
 
 function Tasks({ parent, parentId }: any) {
   const [loading, setLoading] = useState(true);
@@ -64,9 +64,13 @@ function Tasks({ parent, parentId }: any) {
     getTasks();
   }, [parentId]);
 
+  if (tasks.length === 0) {
+    return <></>;
+  }
+
   return (
     <div>
-      <TaskTree tasks={tasks} parentId={null} />
+      <MainTaskTree tasks={tasks} parentId={null} />
     </div>
   );
 }
